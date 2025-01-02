@@ -6,17 +6,25 @@ const mongoose = require('mongoose');
 
 // 2). endpoints.... CRUD
 
-router.post('/post', (req, res) => {
-    res.send('Test POST Endpoint');
-})
+    router.post('/post', (req, res) => {
+        res.send('Test POST Endpoint');
+    })
 
-// router.get('/get')
+    router.get('/getAll', (req, res) => {
+        res.send('Test GET Endpoint');
+    })
 
-// router.get('/get/:id')
+    router.get('/getOne/:id', (req, res) => {
+        res.send(req.params.id);
+    })
 
-// router.patch('/patch/:id')
+    router.patch('/patch/:id', (req, res) => {
+        res.send('Test PATCH Endpoint');
+    })
 
-// router.delete('/delete/:id')
+    router.delete('/delete/:id', (res, req) => {
+        res.send('Test DELETE Endpoint');
+    })
 
 // 3). export router
 module.exports = router;
