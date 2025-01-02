@@ -22,7 +22,9 @@ const Model = require('../models/model');
             res.status(200).json(saveTask);
         }
         catch(error){
-            res.status(400).json({message: error.message});
+            res.status(400).json({
+                message: error.message
+            });
         }
 
     })
@@ -36,7 +38,9 @@ const Model = require('../models/model');
             res.json(data);
         }
         catch(error){
-            res.status(500).json({message: error.message});
+            res.status(500).json({
+                message: error.message
+            });
         }
 
     })
@@ -49,7 +53,9 @@ const Model = require('../models/model');
             res.json(data)
         }
         catch(error){
-            res.status(500).json({message: error.message});
+            res.status(500).json({
+                message: error.message
+            });
         }
     })
 
