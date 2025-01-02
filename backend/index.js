@@ -21,8 +21,6 @@ require('dotenv').config();
 
 const database = mongoose.connection; 
 mongoose.connect(process.env.DB_URL);
-    //mongoString,
-    //{ useNewUrlParser: true, useUnifiedTopology: true }
 
 database.on('error', (error) => {
     console.log(`Issue: ${error}`);
