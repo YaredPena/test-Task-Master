@@ -1,21 +1,13 @@
-import React from 'react';
 import { getTasks } from '../services/TaskService';
 
-const GetAllTasks = ({ setData }) => {
-  const handleFetchTasks = async () => {
-    try {
-      const data = await getTasks();
-      setData(data);
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-    }
-  };
-
-  return (
-    <div>
-      <button onClick={handleFetchTasks}>All Tasks</button>
-    </div>
-  );
+const GetAllTasks = async () => {
+  try {
+    const data = await getTasks();
+    return data;
+  } catch (error) {
+    console.error('Error fetching tasks:', error);
+    throw error;
+  }
 };
 
 export default GetAllTasks;
