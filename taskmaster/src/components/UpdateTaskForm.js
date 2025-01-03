@@ -1,83 +1,78 @@
 import React, { useState } from 'react';
-import { updateTask } from '../services/TaskService';
 
-const UpdateTaskForm = ({ setData }) => {
+function UpdateTaskForm({ setData }) {
   const [taskId, setTaskId] = useState('');
-  const [updateTitle, setUpdateTitle] = useState('');
-  const [updateDescription, setUpdateDescription] = useState('');
-  const [updateDueDate, setUpdateDueDate] = useState('');
-  const [updateStatus, setUpdateStatus] = useState('');
-  const [updatePriority, setUpdatePriority] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [dueDate, setDueDate] = useState('');
+  const [status, setStatus] = useState('');
+  const [priority, setPriority] = useState('');
 
-  const handleUpdateTask = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const updatedTask = { title, description, dueDate, status, priority };
     try {
-      const updatedTask = {
-        title: updateTitle,
-        description: updateDescription,
-        dueDate: updateDueDate,
-        status: updateStatus,
-        priority: updatePriority,
-      };
-      const data = await updateTask(taskId, updatedTask);
+      const response = await fetch(`/api/patch/${taskId}`, {
+        method: 'UPDATE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedTask),
+      });
+      const updatedTaskData = await response.json();
       setData((prevData) =>
-        prevData.map((task) => (task.id === taskId ? data : task))
+        prevData.map((task) => (task._id === taskId ? updatedTaskData : task))
       );
       setTaskId('');
-      setUpdateTitle('');
-      setUpdateDescription('');
-      setUpdateDueDate('');
-      setUpdateStatus('');
-      setUpdatePriority('');
+      setTitle('');
+      setDescription('');
+      setDueDate('');
+      setStatus('');
+      setPriority('');
     } catch (error) {
       console.error('Error updating task:', error);
     }
   };
 
   return (
-    <div>
-      <h2>Update Task</h2>
-      <form onSubmit={handleUpdateTask}>
-        <input
-          type="text"
-          placeholder="Task ID"
-          value={taskId}
-          onChange={(e) => setTaskId(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Title"
-          value={updateTitle}
-          onChange={(e) => setUpdateTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          value={updateDescription}
-          onChange={(e) => setUpdateDescription(e.target.value)}
-        />
-        <input
-          type="date"
-          placeholder="Due Date"
-          value={updateDueDate}
-          onChange={(e) => setUpdateDueDate(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Status"
-          value={updateStatus}
-          onChange={(e) => setUpdateStatus(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Priority"
-          value={updatePriority}
-          onChange={(e) => setUpdatePriority(e.target.value)}
-        />
-        <button type="submit">Update Task</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Task ID:
+        <input type="text" value={taskId} onChange={(e) => setTaskId(e.target.value)} required />
+      </label>
+      <label>
+        Title:
+        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+      </label>
+      <label>
+        Description:
+        <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
+      </label>
+      <label>
+        Due Date:
+        <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} required />
+      </label>
+      <label>
+        Status:
+        <select value={status} onChange={(e) => setStatus(e.target.value)} required>
+          <option value="">Select Status</option>
+          <option value="pending">Pending</option>
+          <option value="in progress">In Progress</option>
+          <option value="completed">Completed</option>
+        </select>
+      </label>
+      <label>
+        Priority:
+        <select value={priority} onChange={(e) => setPriority(e.target.value)} required>
+          <option value="">Select Priority</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </label>
+      <button type="submit">Update Task</button>
+    </form>
   );
-};
+}
 
 export default UpdateTaskForm;

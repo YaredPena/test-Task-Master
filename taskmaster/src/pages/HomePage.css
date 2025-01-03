@@ -55,7 +55,7 @@
   
   nav ul li a {
     color: #fff;
-    background: #34495e;
+    background: #192837;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
@@ -63,7 +63,7 @@
   }
   
   nav ul li a:hover {
-    background: #34495e;
+    background: #223446;
   }
   
   /* Footer */
