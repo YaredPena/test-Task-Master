@@ -12,13 +12,16 @@ function UpdateTaskForm({ setData }) {
     e.preventDefault();
     const updatedTask = { title, description, dueDate, status, priority };
     try {
-      const response = await fetch(`/api/patch/${taskId}`, {
-        method: 'UPDATE',
+      const response = await fetch(`http://localhost:3000/api/patch/${taskId}`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(updatedTask),
       });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
       const updatedTaskData = await response.json();
       setData((prevData) =>
         prevData.map((task) => (task._id === taskId ? updatedTaskData : task))
@@ -76,5 +79,3 @@ function UpdateTaskForm({ setData }) {
 }
 
 export default UpdateTaskForm;
-
-/// I probably should've changed this to just UpdateTask.js
