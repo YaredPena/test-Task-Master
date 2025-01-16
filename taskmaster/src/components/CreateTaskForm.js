@@ -9,7 +9,10 @@ function CreateTaskForm({ setData }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newTask = { title, description, dueDate, status, priority };
+
+    const adjustedDueDate = new Date(dueDate);
+    adjustedDueDate.setMinutes(adjustedDueDate.getMinutes() + adjustedDueDate.getTimezoneOffset());
+    const newTask = { title, description, dueDate: adjustedDueDate.toISOString(), status, priority };
     try {
       const response = await fetch('http://localhost:3000/api/post', {
         method: 'POST',
@@ -71,5 +74,3 @@ function CreateTaskForm({ setData }) {
 }
 
 export default CreateTaskForm;
-
-/// I probably should've changed this to just CreateTask.js
