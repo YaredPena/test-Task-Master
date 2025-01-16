@@ -10,7 +10,10 @@ function UpdateTaskForm({ setData }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedTask = { title, description, dueDate, status, priority };
+    // Adjust the due date to ensure it is correctly set
+    const adjustedDueDate = new Date(dueDate);
+    adjustedDueDate.setMinutes(adjustedDueDate.getMinutes() + adjustedDueDate.getTimezoneOffset());
+    const updatedTask = { title, description, dueDate: adjustedDueDate.toISOString(), status, priority };
     try {
       const response = await fetch(`http://localhost:3000/api/patch/${taskId}`, {
         method: 'PATCH',

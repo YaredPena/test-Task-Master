@@ -50,12 +50,26 @@ function TaskPage({ setData, data }) {
     setDateFilter(e.target.value);
   };
 
+  const handleShowAllTasks = async () => {
+    try {
+      const tasks = await GetAllTasks();
+      setData(tasks);
+      setStatusFilter('');
+      setPriorityFilter('');
+      setNameFilter('');
+      setDateFilter('');
+    } catch (error) {
+      console.error('Error fetching all tasks:', error);
+    }
+  };
+
   const filteredTasks = data.filter((task) => {
+    const taskDueDate = new Date(task.dueDate).toISOString().split('T')[0];
     return (
       (statusFilter === '' || task.status === statusFilter) &&
       (priorityFilter === '' || task.priority === priorityFilter) &&
       (nameFilter === '' || task.title.toLowerCase().includes(nameFilter.toLowerCase())) &&
-      (dateFilter === '' || task.dueDate === dateFilter)
+      (dateFilter === '' || taskDueDate === dateFilter)
     );
   });
 
@@ -63,16 +77,16 @@ function TaskPage({ setData, data }) {
     <div className="taskPage">
       <div className="taskMenu">
         <h2>Task Actions</h2>
-        <button onClick={() => setShowGetTask(!showGetTask)}>Get</button>
+        <button onClick={() => setShowGetTask(!showGetTask)}>Get Task</button>
         {showGetTask && <GetTask setData={setData} />}
-        <button onClick={() => setShowDeleteTask(!showDeleteTask)}>Delete</button>
+        <button onClick={() => setShowDeleteTask(!showDeleteTask)}>Delete Task</button>
         {showDeleteTask && <DeleteTask setData={setData} />}
-        <button onClick={() => setShowCreateTask(!showCreateTask)}>Create</button>
+        <button onClick={() => setShowCreateTask(!showCreateTask)}>Create Task</button>
         {showCreateTask && <CreateTaskForm setData={setData} />}
-        <button onClick={() => setShowUpdateTask(!showUpdateTask)}>Update</button>
+        <button onClick={() => setShowUpdateTask(!showUpdateTask)}>Update Task</button>
         {showUpdateTask && <UpdateTaskForm setData={setData} />}
-        <button onClick={() => setStatusFilter('')}>Show All Tasks</button>
-        <button onClick={() => navigate('/')}>Homepage</button>
+        <button onClick={handleShowAllTasks}>Show All Tasks</button>
+        <button onClick={() => navigate('/')}>Go to Homepage</button>
       </div>
       <div className="taskList">
         <h1>All Tasks</h1>
