@@ -1,0 +1,129 @@
+/* Reset some default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Body styling */
+body {
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+header {
+  width: 100%;
+  background: linear-gradient(90deg, #2c3e50, #2c3e50);
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  background: #34495e;
+  padding: 10px;
+  width: 100%;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+nav a:hover {
+  background: #2c3e50;
+}
+
+/* Main content */
+main {
+  padding: 20px;
+  background: #fff;
+  margin-top: 120px; /* Adjust based on header height */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Remove bullet points from list items */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(90deg, #1d2d3d, #1d2d3d);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #1d2d3d, #2c3e50);
+}
+
+/* Form elements */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input:focus, textarea:focus {
+  border-color: #2c3e50;
+  outline: none;
+}
+
+/* Footer */
+footer {
+  width: 100%;
+  background: linear-gradient(90deg, #2c3e50, #2c3e50);
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
